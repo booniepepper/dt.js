@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+  <script>
+    const chain = (obj, ...fns) => fns.reduce((x, f) => f(x), obj);
+    const tokenize = text => text.replace(/\n/g, ' ').match(/".*?"|\[|\]|[^\s\[\]]+/g);
+    const dteval = code => console.log({code});
+    const clear = ta => { text = ta.value; ta.value = ''; return text; };
+    const handleTextEvent = ({key}, textarea) => key == 'Enter' && chain(textarea, clear, tokenize, dteval);
+  </script>
+</head>
+<body><center>
+  <main>
+    <textarea onkeyup='handleTextEvent(event, this)'></textarea>
+  </main>
+</center></body>
